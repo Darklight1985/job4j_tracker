@@ -6,4 +6,5 @@ public class Dog {
         Dog polkan = new Dog();
         Dog zhychka = new Dog();
     }
+
 }
