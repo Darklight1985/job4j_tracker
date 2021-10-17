@@ -1,6 +1,7 @@
 package ru.job4j.oop;
 
 import static org.hamcrest.Matchers.closeTo;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Assert;
@@ -25,6 +26,6 @@ public class TriangleTest {
         Triangle triangle = new Triangle(a, b, c);
         double rsl = triangle.area();
         int expected = -1;
-        Assert.assertEquals(expected, rsl, 0.01);
+        assertEquals(expected, rsl, 0.01);
     }
 }
