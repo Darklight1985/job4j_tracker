@@ -5,6 +5,11 @@ import java.util.Date;
 public class Doctor extends Profession {
     private int knowledge;
 
+    public Doctor(String name, String surname, String education, Date birthday, int knowledge) {
+        super(name, surname, education, birthday);
+        this.knowledge = knowledge;
+    }
+
     public int getKnowledge() {
         return knowledge;
     }
@@ -31,12 +36,6 @@ public class Doctor extends Profession {
 
     public Diagnose heal(Patient patient) {
         return new Diagnose();
-    }
-
-    public class Diagnose {
-    }
-
-    public class Patient {
     }
 
 }

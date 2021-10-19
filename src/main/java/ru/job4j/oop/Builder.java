@@ -5,6 +5,11 @@ import java.util.Date;
 public class Builder extends Engineer {
     private String instrument;
 
+    public Builder(String name, String surname, String education, Date birthday, int iq, String instrument) {
+        super(name, surname, education, birthday, iq);
+        this.instrument = instrument;
+    }
+
     @Override
     public int getIq() {
         return super.getIq();
@@ -39,6 +44,4 @@ public class Builder extends Engineer {
         return new House();
     }
 
-    public class House {
-    }
 }

@@ -5,6 +5,11 @@ import java.util.Date;
 public class Engineer extends Profession {
     private int iq;
 
+    public Engineer(String name, String surname, String education, Date birthday, int iq) {
+        super(name, surname, education, birthday);
+        this.iq = iq;
+    }
+
     public int getIq() {
         return iq;
     }
@@ -32,9 +37,5 @@ public class Engineer extends Profession {
     public Idea creation() {
         return new Idea();
     }
-
-    class Idea {
-    }
-
 }
 
