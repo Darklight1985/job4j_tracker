@@ -5,7 +5,8 @@ import java.util.Date;
 public class Dentist extends Doctor {
     private int devices;
 
-    public Dentist(String name, String surname, String education, Date birthday, int knowledge, int devices) {
+    public Dentist(String name, String surname, String education, Date birthday,
+                   int knowledge, int devices) {
         super(name, surname, education, birthday, knowledge);
         this.devices = devices;
     }

@@ -5,7 +5,8 @@ import java.util.Date;
 public class Programmer extends Engineer {
     private String specialisation;
 
-    public Programmer(String name, String surname, String education, Date birthday, int iq, String specialisation) {
+    public Programmer(String name, String surname, String education, Date birthday,
+                      int iq, String specialisation) {
         super(name, surname, education, birthday, iq);
         this.specialisation = specialisation;
     }
