@@ -7,7 +7,6 @@ public class Library {
         Book javaRukovodstvo = new Book("Java8 Rukovodstvo", 320);
         Book headFirst = new Book("Head First", 300);
         Book[] books = new Book[4];
-
         books[0] = cleanCode;
         books[1] = philJava;
         books[2] = javaRukovodstvo;
