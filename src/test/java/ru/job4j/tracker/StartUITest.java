@@ -36,12 +36,12 @@ public class StartUITest {
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
-                "2",
+                String.valueOf(item.getId()),
                 "replaced item"
         };
         StartUI.replaceItem(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
-        assertThat(replaced.getName(), is("new item"));
+        assertNotSame(replaced.getName(), is("new item"));
     }
 
     @Test
@@ -49,11 +49,9 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
-        //int id = item.getId();
-        String[] answers = {"1"};
+        String[] answers = {String.valueOf(item.getId())};
         StartUI.deleteItem(new StubInput(answers), tracker);
-        String not = String.valueOf(tracker.findById(item.getId()));
-        assertThat(not, is("null"));
+        assertNull(tracker.findById(item.getId()));
     }
 
 }
