@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import javax.swing.*;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -10,7 +13,8 @@ public class StartUITest {
         String[] answers = {"Fix PC"};
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
-        StartUI.createItem(input, tracker);
+        UserAction createAction = new CreateAction();
+        createAction.execute(input, tracker);
         Item created = tracker.findAll()[0];
         Item expected = new Item("Fix PC");
         assertThat(created.getName(), is(expected.getName()));
@@ -25,7 +29,8 @@ public class StartUITest {
                 String.valueOf(item.getId()),
                 "replaced item"
         };
-        StartUI.replaceItem(new StubInput(answers), tracker);
+        UserAction replaceAction = new ReplaceAction();
+        replaceAction.execute(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
         assertThat(replaced.getName(), is("replaced item"));
     }
@@ -39,7 +44,8 @@ public class StartUITest {
                 String.valueOf(item.getId()),
                 "replaced item"
         };
-        StartUI.replaceItem(new StubInput(answers), tracker);
+        UserAction replaceAction = new ReplaceAction();
+        replaceAction.execute(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
         assertNotSame(replaced.getName(), is("new item"));
     }
@@ -50,7 +56,8 @@ public class StartUITest {
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {String.valueOf(item.getId())};
-        StartUI.deleteItem(new StubInput(answers), tracker);
+        UserAction deleteAction = new DeleteAction();
+        deleteAction.execute(new StubInput(answers), tracker);
         assertNull(tracker.findById(item.getId()));
     }
 
