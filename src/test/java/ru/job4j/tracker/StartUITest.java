@@ -194,9 +194,6 @@ public class StartUITest {
                 )
         );
     }
-
-
-
 }
 
 
