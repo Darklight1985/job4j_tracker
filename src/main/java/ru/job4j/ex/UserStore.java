@@ -5,9 +5,9 @@ public class UserStore {
 
     public static User findUser(User[] users, String login) throws UserNotFoundException {
         User rsl = null;
-        for (int index = 0; index < users.length; index++) {
-            if (users[index].getUsername().equals(login)) {
-                rsl = users[index];
+        for (User user: users) {
+            if (user.getUsername().equals(login)) {
+                rsl = user;
                 break;
             }
         }
@@ -18,7 +18,7 @@ public class UserStore {
     }
 
     public static boolean validate(User user) throws UserInvalidException {
-       if (user.isValid() && user.getUsername().length() < 3) {
+       if (user.isValid() || user.getUsername().length() < 3) {
            throw new UserInvalidException("user is not valid");
        }
        return true;
