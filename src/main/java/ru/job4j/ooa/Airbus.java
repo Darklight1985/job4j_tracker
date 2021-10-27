@@ -20,7 +20,6 @@ public class Airbus {
         this.name = name;
     }
 
-    //@Override
     public void printModel() {
         System.out.println("Модель самолета: " + name);
     }
