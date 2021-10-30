@@ -18,13 +18,14 @@ public class Tracker {
         for (Item item: items) {
             if (item.getId() == id) {
                rsl = item;
+               break;
             }
         }
         return rsl;
     }
 
     public List<Item> findAll() {
-        return this.items;
+        return List.copyOf(items);
     }
 
     public List<Item> findByName(String key) {
@@ -39,9 +40,10 @@ public class Tracker {
 
     private int indexOf(int id) {
         int index = -1;
- for (Item item: items) {
-     if (item.getId() == id) {
-        index = items.indexOf(item);
+        for (int i = 0; i < items.size(); i++) {
+          if (items.get(i).getId() == id) {
+          index = i;
+          break;
      }
  }
  return index;
@@ -59,12 +61,11 @@ public class Tracker {
 
     public boolean delete(int id) {
         boolean rsl = false;
-        for (Item item: items) {
-            if (item.getId() == id) {
-               rsl = items.remove(item);
-               break;
-            }
-        }
+       int index = indexOf(id);
+       if (index > -1) {
+           items.remove(index);
+           rsl = true;
+       }
         return rsl;
 
     }
