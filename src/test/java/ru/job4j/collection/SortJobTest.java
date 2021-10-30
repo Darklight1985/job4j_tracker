@@ -48,7 +48,8 @@ public class SortJobTest {
 
         @Test
         public void whenCompatorByNameAndPrority() {
-            Comparator<Job> cmpNamePriority = new SortJobNameAscend().thenComparing(new SortJobPriorAscend());
+            Comparator<Job> cmpNamePriority = new SortJobNameAscend().
+                    thenComparing(new SortJobPriorAscend());
             int rsl = cmpNamePriority.compare(
                     new Job("Doctor", 0),
                     new Job("Sergeant", 1)
