@@ -52,7 +52,7 @@ public class SortJobTest {
                     thenComparing(new SortJobPriorAscend());
             int rsl = cmpNamePriority.compare(
                     new Job("Doctor", 0),
-                    new Job("Sergeant", 1)
+                    new Job("Doctor", 1)
             );
             assertThat(rsl, lessThan(0));
         }
