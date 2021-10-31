@@ -33,9 +33,9 @@ public class SortJobTest {
     @Test
     public void sortJobAscendPrior() {
         Job first = new Job("Engineer", 1);
-        Job second = new Job("Boocher", 5);
+        Job second = new Job("Boocher", 100);
         int rsl = new SortJobPriorAscend().compare(first, second);
-        assertThat(rsl, is(-4));
+        assertThat(rsl, is(-1));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class SortJobTest {
         Job first = new Job("Engineer", 1);
         Job second = new Job("Boocher", 5);
         int rsl = new SortJobPriorDescend().compare(first, second);
-        assertThat(rsl, is(4));
+        assertThat(rsl, is(1));
     }
 
         @Test
