@@ -14,6 +14,7 @@ public class ScopeInside {
             total += num;
         }
         System.out.println(total);
+
     }
 
     private static Integer add(Supplier<Integer> calc) {
