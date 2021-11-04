@@ -26,7 +26,7 @@ public class FunctionDiapTest {
 
     @Test
     public void whenExpFunctionThenLinearResults() {
-        List<Double> result = new FunctionDiap().diapasone(1, 4, x -> Math.pow(x, 3) - x);
+        List<Double> result = new FunctionDiap().diapasone(1, 4, x -> Math.pow(3, x) - x);
         List<Double> expected = Arrays.asList(0D, 6D, 24D);
         assertThat(result, is(expected));
     }
