@@ -22,10 +22,11 @@ public class TourCompanyTest {
         TourCompany tourCompany = new TourCompany();
         List<Address> rsl = tourCompany.collect(profiles);
         List<Address> expected = new ArrayList<>();
-        expected.add(new Address("Saint-Peterburg", "Kommune", 14, 125));
         expected.add(new Address("Moscow", "Lenina", 25, 56));
+        expected.add(new Address("Saint-Peterburg", "Kommune", 14, 125));
         expected.add(new Address("Saratov", "Beloostrovskaya", 38, 29));
         expected.add(new Address("Volgograd", "Esenina", 1, 78));
+        rsl.forEach(s -> System.out.println(s.getCity()));
         assertThat(rsl, is(expected));
     }
 
@@ -40,5 +41,25 @@ public class TourCompanyTest {
         TourCompany tourCompany = new TourCompany();
         List<Address> rsl = tourCompany.collect(profiles);
         assertThat(rsl.size(), is(4));
+    }
+
+    @Test
+    public void whenDublicateAdress() {
+        List<Profile> profiles = List.of(
+                new Profile(new Address("Saint-Peterburg", "Kommune", 14, 125)),
+                new Profile(new Address("Moscow", "Lenina", 25, 56)),
+                new Profile(new Address("Moscow", "Lenina", 25, 56)),
+                new Profile(new Address("Saratov", "Beloostrovskaya", 38, 29)),
+                new Profile(new Address("Volgograd", "Esenina", 1, 78))
+        );
+        TourCompany tourCompany = new TourCompany();
+        List<Address> rsl = tourCompany.collect(profiles);
+        List<Address> expected = new ArrayList<>();
+        expected.add(new Address("Moscow", "Lenina", 25, 56));
+        expected.add(new Address("Saint-Peterburg", "Kommune", 14, 125));
+        expected.add(new Address("Saratov", "Beloostrovskaya", 38, 29));
+        expected.add(new Address("Volgograd", "Esenina", 1, 78));
+        rsl.forEach(s -> System.out.println(s.getCity()));
+        assertThat(rsl, is(expected));
     }
 }
