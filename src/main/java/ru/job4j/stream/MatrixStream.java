@@ -10,6 +10,8 @@ public class MatrixStream {
         List<List<Integer>> list = Stream.of(matrix)
                 .map(Arrays::asList)
                 .collect(Collectors.toList());
+
+        System.out.println(list.stream().flatMap(e -> e.stream()).collect(Collectors.toList()));
         return list;
     }
 }
