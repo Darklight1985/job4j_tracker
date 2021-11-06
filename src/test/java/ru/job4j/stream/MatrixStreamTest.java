@@ -23,4 +23,19 @@ public class MatrixStreamTest {
         List<List<Integer>> rsl = matrixStream.transform(matrix);
         assertThat(expected, is(rsl));
     }
+
+    @Test
+    public void transformHard() {
+        Integer[][] matrix = {{1, 2}, {3, 4}, {5, 6}};
+        List<List<Integer>> expected = new ArrayList<>();
+        List<Integer> list = Arrays.asList(1, 2);
+        List<Integer> list2 = Arrays.asList(3, 4);
+        List<Integer> list3 = Arrays.asList(5, 6);
+        expected.add(list);
+        expected.add(list2);
+        expected.add(list3);
+        MatrixStream matrixStream = new MatrixStream();
+        List<List<Integer>> rsl = matrixStream.transform(matrix);
+        assertThat(expected, is(rsl));
+    }
 }

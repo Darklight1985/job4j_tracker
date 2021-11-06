@@ -7,11 +7,8 @@ import java.util.stream.Stream;
 
 public class MatrixStream {
     public List<List<Integer>> transform(Integer[][] matrix) {
-        List<List<Integer>> list = Stream.of(matrix)
+        return Stream.of(matrix)
                 .map(Arrays::asList)
                 .collect(Collectors.toList());
-
-        System.out.println(list.stream().flatMap(e -> e.stream()).collect(Collectors.toList()));
-        return list;
     }
 }
