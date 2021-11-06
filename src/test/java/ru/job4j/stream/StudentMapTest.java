@@ -48,8 +48,8 @@ public class StudentMapTest {
         Map<String, Student> rsl = studentMap.collect(students);
         Map<String, Student> expected = new HashMap<>();
         expected.put("Ivanov", new Student(10, "Ivanov"));
-        expected.put("Pushkin", new Student(50, "Pushkin"));
-        expected.put("Dulin", new Student(70, "Dulin"));
+        expected.put("Pushkin", new Student(40, "Pushkin"));
+        expected.put("Dulin", new Student(50, "Dulin"));
         expected.put("Jmurkin", new Student(90, "Jmurkin"));
         rsl.entrySet().forEach(s -> System.out.println(s));
         assertThat(rsl, is(expected));
