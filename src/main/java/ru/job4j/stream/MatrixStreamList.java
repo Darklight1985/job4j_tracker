@@ -16,4 +16,5 @@ public class MatrixStreamList {
                .flatMap(Collection::stream)
                .collect(Collectors.toList());
     }
+
 }
