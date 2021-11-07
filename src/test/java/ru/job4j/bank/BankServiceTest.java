@@ -13,6 +13,7 @@ public class BankServiceTest {
         BankService bank = new BankService();
         bank.addUser(user);
         assertThat(bank.findByPassport("3434").get(), is(user));
+
     }
 
     @Test
