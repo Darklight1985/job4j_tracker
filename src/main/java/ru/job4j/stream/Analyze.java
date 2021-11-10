@@ -1,9 +1,7 @@
 package ru.job4j.stream;
 
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,23 +21,23 @@ public class Analyze {
                 .map(e -> new Tuple(e.getName(),
                         e.getSubjects()
                                 .stream()
-                                .mapToDouble(i -> i.getScore())
+                                .mapToDouble(Subject::getScore)
                                 .average()
                                 .orElse(0)))
                 .collect(Collectors.toList()))
                 .stream()
-                .flatMap(e -> e.stream())
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
     public static List<Tuple> averageScoreByPupil(Stream<Pupil> stream) {
-                Stream<Subject> subjectStream = stream.flatMap(e -> e.getSubjects()
-                        .stream());
 
-        Map<String, Double> map = subjectStream
+        Map<String, Double> map = new LinkedHashMap<>(stream
+                .flatMap(e -> e.getSubjects()
+                .stream())
                 .collect(Collectors
                         .groupingBy(Subject::getName, Collectors
-                                .averagingDouble(Subject::getScore)));
+                                .averagingDouble(Subject::getScore))));
 
         return map.entrySet()
                 .stream()
@@ -54,9 +52,9 @@ public class Analyze {
                 .map(e -> new Tuple(e.getName(),
                         e.getSubjects()
                                 .stream()
-                                .mapToDouble(i -> i.getScore()).sum()))
+                                .mapToDouble(Subject::getScore).sum()))
                 .max(Comparator.comparingDouble(Tuple::getScore))
-                .get();
+                .orElse(null);
 
     }
 
@@ -72,7 +70,7 @@ public class Analyze {
                 .map(e -> new Tuple(e
                         .getKey(), e
                         .getValue()))
-                .max(Comparator.comparingDouble(Tuple::getScore)).get();
+                .max(Comparator.comparingDouble(Tuple::getScore)).orElse(null);
 
     }
 }
