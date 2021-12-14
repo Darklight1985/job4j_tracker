@@ -19,12 +19,10 @@ public class Item {
         this.name = name;
     }
 
-    public Item(int id, String name) {
+    public Item(int id, String name, LocalDateTime time) {
         this.id = id;
         this.name = name;
-        long millis = System.currentTimeMillis();
-        Timestamp timestamp = new Timestamp(millis);
-        this.created = timestamp.toLocalDateTime();
+        this.created = time;
     }
 
     public LocalDateTime getCreated() {
@@ -61,4 +59,7 @@ public class Item {
                 + '}';
     }
 
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
 }
