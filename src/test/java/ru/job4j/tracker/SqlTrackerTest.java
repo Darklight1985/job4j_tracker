@@ -99,8 +99,7 @@ public class SqlTrackerTest {
 
     @Test
     public void whenTestFindAll() {
-        SqlTracker tracker = new SqlTracker();
-        tracker.init();
+        SqlTracker tracker = new SqlTracker(connection);
         Item first = new Item("First");
         Item second = new Item("Second");
         tracker.add(first);
