@@ -20,7 +20,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
         );
-        Store tracker = new SqlTracker();
+        Store tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         Collections.addAll(actions, new CreateAction(output),
                 new ExitAction());
@@ -31,7 +31,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Output output = new ConsoleOutput();
-        Store tracker = new SqlTracker();
+        Store tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input in = new StubInput(
@@ -62,7 +62,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItemTestOutputIsSuccessfully() {
         Output out = new StubOutput();
-        Store tracker = new SqlTracker();
+        Store tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         String replaceName = "New Test Name";
         Input in = new StubInput(
@@ -88,7 +88,7 @@ public class StartUITest {
     @Test
     public void whenFindAllActionIsSuccessfully() {
         Output out = new StubOutput();
-        Store tracker = new SqlTracker();
+        Store tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         String timer = String.valueOf(one.getCreated().
                 format(DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss")));
@@ -109,14 +109,13 @@ public class StartUITest {
                         + "Menu:" + ln
                         + "0. Show all items" + ln
                         + "1. Exit Program" + ln
-
         ));
     }
 
     @Test
     public void whenFindByIdIsSuccessfully() {
         Output out = new StubOutput();
-        Store tracker = new SqlTracker();
+        Store tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         String timer = String.valueOf(one.getCreated().
                 format(DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss")));
@@ -144,7 +143,7 @@ public class StartUITest {
     @Test
     public void whenFindByNameIsSuccessfully() {
         Output out = new StubOutput();
-        Store tracker = new SqlTracker();
+        Store tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         String timer = String.valueOf(one.getCreated().
                 format(DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss")));
@@ -165,7 +164,6 @@ public class StartUITest {
                         + "Menu:" + ln
                         + "0. Find Item by name" + ln
                         + "1. Exit Program" + ln
-
         ));
     }
 
