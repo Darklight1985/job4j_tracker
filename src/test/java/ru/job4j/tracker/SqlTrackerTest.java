@@ -65,13 +65,11 @@ public class SqlTrackerTest {
         SqlTracker tracker = new SqlTracker(connection);
         Item first = new Item("First");
         Item second = new Item("Second");
+        Item three = new Item("First");
         tracker.add(first);
         tracker.add(second);
-        tracker.add(new Item("First"));
-        tracker.add(new Item("Second"));
-        tracker.add(new Item("First"));
-        List<Item> result = tracker.findByName(first.getName());
-        assertThat(result.size(), is(3));
+        tracker.add(three);
+        assertThat(tracker.findByName(first.getName()), is(List.of(first, three)));
     }
 
     @Test
@@ -84,8 +82,7 @@ public class SqlTrackerTest {
         tracker.add(new Item("First"));
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
-        List<Item> result = tracker.findByName(second.getName());
-        assertThat(result.get(1).getName(), is(second.getName()));
+        assertThat(tracker.findByName(second.getName()).get(1).getName(), is(second.getName()));
     }
 
     @Test
@@ -104,8 +101,7 @@ public class SqlTrackerTest {
         Item second = new Item("Second");
         tracker.add(first);
         tracker.add(second);
-        Item result = tracker.findAll().get(0);
-        assertThat(result.getName(), is(first.getName()));
+        assertThat(tracker.findAll().get(0).getName(), is(first.getName()));
     }
 
     @Test
@@ -118,7 +114,7 @@ public class SqlTrackerTest {
         Item bugWithDesc = new Item();
         bugWithDesc.setName("Bug with description");
         tracker.replace(id, bugWithDesc);
-        assertTrue(tracker.replace(id, bugWithDesc));
+        assertThat(tracker.findById(id).getName(), is("Bug with description"));
     }
 
     @Test
