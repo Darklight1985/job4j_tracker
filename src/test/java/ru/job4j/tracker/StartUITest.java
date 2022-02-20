@@ -11,6 +11,8 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 public class StartUITest {
 
@@ -186,6 +188,55 @@ public class StartUITest {
                         + "0. Exit Program" + ln
                 )
         );
+    }
+
+    @Test
+    public void whenDeleteItemByMokito() {
+        Output out = new StubOutput();
+        Store tracker = new MemTracker();
+        Item item = tracker.add(new Item("Deleted item"));
+        DeleteAction del = new DeleteAction(out);
+
+        Input input = mock(Input.class);
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        del.execute(input, tracker);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is("=== Delete item ===" + ln + "Заявка удалена успешно." + ln));
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
+    }
+
+    @Test
+    public void whenFindByIdByMokito() {
+        Output out = new StubOutput();
+        Store tracker = new MemTracker();
+        Item one = tracker.add(new Item("test1"));
+        FindItemByIdAction find = new FindItemByIdAction(out);
+
+        Input input = mock(Input.class);
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        Boolean answer = find.execute(input, tracker);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is("=== Find item by id ===" + ln + one + ln));
+        assertTrue(answer);
+    }
+
+    @Test
+    public void whenFindByNameByMokito() {
+        Output out = new StubOutput();
+        Store tracker = new MemTracker();
+        Item one = tracker.add(new Item("test1"));
+        Item two = tracker.add(new Item("test1"));
+        FindItemByNameAction find = new FindItemByNameAction(out);
+
+        Input input = mock(Input.class);
+        when(input.askStr(any(String.class))).thenReturn(one.getName());
+
+        Boolean answer = find.execute(input, tracker);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is("=== Find items by name ===" + ln + one + ln + two + ln));
+        assertTrue(answer);
     }
 }
 
