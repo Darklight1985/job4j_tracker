@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HbmTracker implements Store, AutoCloseable {
@@ -28,7 +29,11 @@ public class HbmTracker implements Store, AutoCloseable {
     public boolean replace(int id, Item item) {
         Session session = sf.openSession();
         session.beginTransaction();
-        session.update(item);
+        Item newItem = session.get(Item.class, id);
+        newItem.setName(item.getName());
+        newItem.setDescription(item.getDescription());
+        newItem.setCreated(item.getCreated());
+        session.saveOrUpdate(newItem);
         session.getTransaction().commit();
         session.close();
         return true;
@@ -59,7 +64,7 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         Session session = sf.openSession();
-        List result = null;
+        List result = new ArrayList();
         session.beginTransaction();
         List<Item> list = session.createQuery("from ru.job4j.tracker.Item")
                 .list();
@@ -91,10 +96,5 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public void close() throws Exception {
         StandardServiceRegistryBuilder.destroy(registry);
-    }
-
-    public static void main(String[] args) {
-        HbmTracker hbmTracker = new HbmTracker();
-        System.out.println(hbmTracker.findByName("Hibernate"));
     }
 }
